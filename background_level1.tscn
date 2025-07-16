@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgw6tgjjtn2ym"]
+
+[sub_resource type="Gradient" id="Gradient_h1rgk"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v4q5t"]
+gradient = SubResource("Gradient_h1rgk")
+
+[node name="TextureRect" type="TextureRect"]
+offset_right = 1150.0
+offset_bottom = 646.0
+texture = SubResource("GradientTexture2D_v4q5t")

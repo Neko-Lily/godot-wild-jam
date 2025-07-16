@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6th0jhod67kr"]
+
+[ext_resource type="Script" uid="uid://dc6doldggkg65" path="res://tree.gd" id="1_nnvrw"]
+[ext_resource type="Texture2D" uid="uid://tyyu1ucsacpb" path="res://icon.svg" id="2_gvmkm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d2g23"]
+radius = 40.0
+
+[node name="tree" type="Area2D" node_paths=PackedStringArray("burnTimer")]
+script = ExtResource("1_nnvrw")
+burnTimer = NodePath("burnTimer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.027451, 0.513726, 0, 1)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_gvmkm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d2g23")
+
+[node name="burnTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="burnTimer" to="." method="_on_timer_timeout"]
