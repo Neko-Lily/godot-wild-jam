@@ -40,6 +40,7 @@ func set_wait_time_to_time_left() -> void:
 
 func _on_burn_trigger_timer_timeout() -> void:
 	start_resizeTimer()
+	start_fadeTimer()
 
 func start_fadeTimer():
 	add_child(fadeTimer)
@@ -49,8 +50,8 @@ func start_fadeTimer():
 	fadeTimer.start()
 	
 func start_resizeTimer():
-	modulate = Color.from_rgba8(207, 53, 46)
-	add_child(resizeTimer)
+	sprite.modulate = Color.from_rgba8(207, 53, 46)
+	self.add_child(resizeTimer)
 	resizeTimer.set_wait_time(0.35)
 	resizeTimer.one_shot = false
 	resizeTimer.timeout.connect(_on_resize_timer_timeout)
@@ -67,4 +68,4 @@ func _on_resize_timer_timeout():
 		set_scale(Vector2(0.4,0.4))
 
 func _on_fade_timer_timeout():
-	self.free()
+	queue_free()

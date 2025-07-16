@@ -1,8 +1,5 @@
-extends Area2D
+extends Sprite2D
 
-@export var sprite: Sprite2D
-@export var burnTimer: Timer
-var timeLeft: float
 var resizeTimer: Timer = Timer.new()
 var fadeTimer: Timer = Timer.new()
 
@@ -15,31 +12,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_body_entered(body: Node2D) -> void:
-	if burnTimer.wait_time > 0:
-		if burnTimer.is_paused():
-			burnTimer.set_paused(false) 
-		else:
-			burnTimer.start()
-			print(burnTimer.get_time_left())
-			
-func _on_body_exited(body: Node2D) -> void:
-	if burnTimer.wait_time > 0:
-		set_wait_time_to_time_left()
-		burnTimer.stop()
-
-
-func _on_timer_timeout() -> void:
-	monitoring = false
-	burnTimer.queue_free()
-
-func set_wait_time_to_time_left() -> void:
-	timeLeft = burnTimer.get_time_left()
-	burnTimer.set_wait_time(timeLeft)
-
 
 func _on_burn_trigger_timer_timeout() -> void:
 	start_resizeTimer()
+
 
 func start_fadeTimer():
 	add_child(fadeTimer)
@@ -67,4 +43,4 @@ func _on_resize_timer_timeout():
 		set_scale(Vector2(0.4,0.4))
 
 func _on_fade_timer_timeout():
-	self.free()
+	get_parent().free()
