@@ -58,14 +58,15 @@ func start_resizeTimer():
 	resizeTimer.start()
 
 func _on_resize_timer_timeout():
-	if scale < Vector2(0.3,0.3):
-		set_scale(Vector2(0.35, 0.35))
+	if scale < Vector2(2.0,2.0):
+		set_scale(Vector2(2.05, 2.05))
 		
-	elif scale > Vector2(0.3, 0.3):
-		set_scale(Vector2(0.25,0.25))
+	elif scale > Vector2(2.0, 2.0):
+		set_scale(Vector2(1.95,1.95))
 	
 	else:
-		set_scale(Vector2(0.4,0.4))
+		set_scale(Vector2(2.1,2.1))
 
 func _on_fade_timer_timeout():
+	Globals.tree_count -= 1
 	queue_free()

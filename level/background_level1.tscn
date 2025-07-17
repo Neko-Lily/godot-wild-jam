@@ -4,8 +4,11 @@
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_v4q5t"]
 gradient = SubResource("Gradient_h1rgk")
+width = 1920
+height = 1080
 
 [node name="TextureRect" type="TextureRect"]
 offset_right = 1150.0
 offset_bottom = 646.0
 texture = SubResource("GradientTexture2D_v4q5t")
+stretch_mode = 6
