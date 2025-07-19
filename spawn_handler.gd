@@ -1,6 +1,6 @@
 extends Node
 
-var burningTree = preload("res://enemies/scene/burningTree.tscn")
+var burningTree = preload("res://enemies/burning-tree/scene/burningTree.tscn")
 
 
 func _ready() -> void:
@@ -16,8 +16,7 @@ func spawn_burning_trees():
 		add_child(burnTreeInstance)
 		Globals.tree_count += 1
 		if burnTreeInstance.position == burnTreeInstance.position:
-			burnTreeInstance.position = Vector2(randi_range(-928, 928),randi_range(-508, 508)) 
+			burnTreeInstance.position = Vector2(randi_range(-928, 928),randi_range(-488, 508)) 
 		else:
 			add_child(burningTree)
-			burnTreeInstance.position = Vector2(randi_range(-928, 928),randi_range(-508, 508)) 
-		
+			burnTreeInstance.position = Vector2(randi_range(-928, 928),randi_range(-488, 508))

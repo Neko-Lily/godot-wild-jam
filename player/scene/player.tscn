@@ -1,19 +1,66 @@
-[gd_scene load_steps=4 format=3 uid="uid://ml2y6bdm6ox4"]
+[gd_scene load_steps=10 format=3 uid="uid://ml2y6bdm6ox4"]
 
 [ext_resource type="Script" uid="uid://d20qf4useq5y8" path="res://player/script/player-script.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://tyyu1ucsacpb" path="res://icon.svg" id="2_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://dk6lmyyomoxra" path="res://player/sprite/flamy_sprite-sheet.png" id="2_mn6jy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_mn6jy"]
+radius = 13.6758
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8p4p3"]
+atlas = ExtResource("2_mn6jy")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4eyqk"]
+atlas = ExtResource("2_mn6jy")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08jip"]
+atlas = ExtResource("2_mn6jy")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gp3q6"]
+atlas = ExtResource("2_mn6jy")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tblmv"]
+atlas = ExtResource("2_mn6jy")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_263ev"]
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_8p4p3")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_4eyqk")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_08jip")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_gp3q6")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_tblmv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
 
 [node name="player" type="CharacterBody2D"]
-scale = Vector2(0.35, 0.35)
+z_index = 1
+scale = Vector2(6, 6)
 motion_mode = 1
 script = ExtResource("1_onrkg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_hqtel")
+position = Vector2(0, 2.38419e-07)
+shape = SubResource("CircleShape2D_mn6jy")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.839216, 0.2, 0.243137, 1)
-z_index = 1
-texture = ExtResource("2_i3pqv")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_263ev")
+autoplay = "default"
+frame_progress = 0.931785

@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgw6tgjjtn2ym"]
+[gd_scene load_steps=4 format=3 uid="uid://br4nfhy88noel"]
+
+[ext_resource type="PackedScene" uid="uid://b6jt5vlyqulal" path="res://background_lvl.tscn" id="1_t12dr"]
 
 [sub_resource type="Gradient" id="Gradient_h1rgk"]
 
@@ -12,3 +14,5 @@ offset_right = 1150.0
 offset_bottom = 646.0
 texture = SubResource("GradientTexture2D_v4q5t")
 stretch_mode = 6
+
+[node name="TileMapLayer" parent="." instance=ExtResource("1_t12dr")]
