@@ -7,11 +7,13 @@ var timeLeft: float
 var resizeTimer: Timer = Timer.new()
 var fadeTimer: Timer = Timer.new()
 var scorePoints: float = 100
+@onready var audio = $AudioStreamPlayer
+var burnAudio = load("res://audio/fireball-whoosh-1-179125.mp3")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	Globals.game_over.connect(_on_game_over)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -44,6 +46,9 @@ func set_wait_time_to_time_left() -> void:
 
 func _on_burn_trigger_timer_timeout() -> void:
 	Globals.score += scorePoints
+	audio.stream = burnAudio
+	audio.pitch_scale = (randf_range(0.2, 2.2))
+	audio.play()
 	start_resizeTimer()
 	start_fadeTimer()
 
@@ -74,4 +79,8 @@ func _on_resize_timer_timeout():
 
 func _on_fade_timer_timeout():
 	Globals.tree_count -= 1
+	queue_free()
+
+func _on_game_over():
+	
 	queue_free()

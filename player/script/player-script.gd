@@ -15,13 +15,13 @@ func _physics_process(delta: float) -> void:
 func get_player_movement(InputEvent, delta):
 	velocity = Vector2()
 	if Input.is_action_pressed("up"):
-		velocity.y = -40 * SPEED*delta
+		velocity.y = -80 * SPEED*delta
 	if Input.is_action_pressed("down"):
-		velocity.y = 40 * SPEED*delta
+		velocity.y = 80 * SPEED*delta
 	if Input.is_action_pressed("left"):
-		velocity.x = -40 * SPEED*delta
+		velocity.x = -80 * SPEED*delta
 	if Input.is_action_pressed("right"):
-		velocity.x = 40 * SPEED*delta
+		velocity.x = 80 * SPEED*delta
 	
 	velocity.normalized() * SPEED * delta
 	

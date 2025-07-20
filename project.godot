@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="godot-wild-jam-consume"
+config/name="Firestarter"
 run/main_scene="uid://dt8c5l6x8tm2m"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
@@ -29,6 +29,7 @@ window/stretch/mode="canvas_items"
 [global_group]
 
 Player=""
+SFX=""
 
 [input]
 

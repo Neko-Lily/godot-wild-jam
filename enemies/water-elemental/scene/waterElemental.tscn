@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://dr4bpjx55hbai"]
+
+[ext_resource type="Script" uid="uid://cb13kpig60lmq" path="res://enemies/water-elemental/scene/water_elemental.gd" id="1_u4uhe"]
+[ext_resource type="Texture2D" uid="uid://dk6lmyyomoxra" path="res://player/sprite/flamy_sprite-sheet.png" id="2_be370"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u4uhe"]
+friction = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrjjw"]
+atlas = ExtResource("2_be370")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xavhl"]
+atlas = ExtResource("2_be370")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tufha"]
+atlas = ExtResource("2_be370")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ustkb"]
+atlas = ExtResource("2_be370")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4inx2"]
+atlas = ExtResource("2_be370")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8l1b4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hrjjw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xavhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tufha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ustkb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4inx2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_be370"]
+radius = 16.0
+
+[node name="waterElemental" type="RigidBody2D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 2
+mass = 0.001
+physics_material_override = SubResource("PhysicsMaterial_u4uhe")
+gravity_scale = 0.0
+can_sleep = false
+script = ExtResource("1_u4uhe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 0.309804, 0.647059, 1)
+texture_filter = 1
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_8l1b4")
+autoplay = "default"
+frame_progress = 0.245782
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="AnimatedSprite2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_be370")
+
+[connection signal="screen_exited" from="AnimatedSprite2D/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
