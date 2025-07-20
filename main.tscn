@@ -1,17 +1,83 @@
-[gd_scene load_steps=4 format=3 uid="uid://dt8c5l6x8tm2m"]
+[gd_scene load_steps=8 format=3 uid="uid://dt8c5l6x8tm2m"]
 
 [ext_resource type="Script" uid="uid://bcu8lppcktpwr" path="res://spawn_handler.gd" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://ml2y6bdm6ox4" path="res://player/scene/player.tscn" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://b6jt5vlyqulal" path="res://background_lvl.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://b18m0k0fuyd8n" path="res://level.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://daa2vscgfut4q" path="res://start_screen.tscn" id="2_h2yge"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1bvp3"]
+font_size = 128
+font_color = Color(0.976471, 0.678431, 0.654902, 1)
+shadow_size = 8
+shadow_color = Color(0.411765, 0.196078, 0.317647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(0.837789, 0.470033, 0.575689, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+bg_color = Color(0.839216, 0.470588, 0.576471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
+bg_color = Color(0.839216, 0.470588, 0.576471, 1)
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_h2yge")
 
-[node name="spawnHandler" type="Node" parent="."]
+[node name="startScreen" parent="." instance=ExtResource("2_h2yge")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Control" type="Control" parent="startScreen"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -960.0
+offset_top = -536.0
+offset_right = 960.0
+offset_bottom = 544.0
 
-[node name="player" parent="." instance=ExtResource("2_h2yge")]
+[node name="Label" type="Label" parent="startScreen/Control"]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 120.0
+offset_right = 824.0
+offset_bottom = 295.0
+text = "Firestarter"
+label_settings = SubResource("LabelSettings_1bvp3")
 
-[node name="TileMapLayer" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(-960, -544)
+[node name="play_button" type="Button" parent="startScreen/Control"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 472.0
+offset_right = 600.0
+offset_bottom = 568.0
+theme_override_colors/font_color = Color(1, 0.356863, 0.564706, 1)
+theme_override_font_sizes/font_size = 64
+theme_override_styles/hover = SubResource("StyleBoxFlat_lquwl")
+text = "Play"
+
+[node name="settings_button" type="Button" parent="startScreen/Control"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 632.0
+offset_right = 600.0
+offset_bottom = 728.0
+theme_override_colors/icon_normal_color = Color(1, 0.356863, 0.564706, 1)
+theme_override_colors/font_color = Color(1, 0.356863, 0.564706, 1)
+theme_override_font_sizes/font_size = 64
+theme_override_styles/hover = SubResource("StyleBoxFlat_h2yge")
+text = "Settings"
+
+[node name="quit_button" type="Button" parent="startScreen/Control"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 792.0
+offset_right = 600.0
+offset_bottom = 888.0
+theme_override_colors/font_color = Color(1, 0.356863, 0.564706, 1)
+theme_override_font_sizes/font_size = 64
+theme_override_styles/hover = SubResource("StyleBoxFlat_1bvp3")
+text = "Quit
+"
+
+[node name="level" parent="." instance=ExtResource("2_0xm2m")]
+visible = false
+
+[connection signal="pressed" from="startScreen/Control/play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="startScreen/Control/quit_button" to="." method="_on_quit_button_pressed"]

@@ -1,10 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbo1sg40k8ca1"]
+[gd_scene load_steps=11 format=3 uid="uid://cbo1sg40k8ca1"]
 
 [ext_resource type="Script" uid="uid://b4yhmwcymwv2q" path="res://enemies/burning-tree/script/burningtree.gd" id="1_cka2w"]
 [ext_resource type="Texture2D" uid="uid://dg40t0nx16b5p" path="res://enemies/burning-tree/sprite/bush.png" id="2_cka2w"]
+[ext_resource type="Script" uid="uid://dijvj3unbr8c6" path="res://enemies/burning-tree/scene/burnProgressBar.gd" id="3_uj6mr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d2g23"]
 radius = 32.5459
+
+[sub_resource type="Gradient" id="Gradient_cka2w"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uj6mr"]
+gradient = SubResource("Gradient_cka2w")
+use_hdr = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1rhkc"]
+texture = SubResource("GradientTexture1D_uj6mr")
+modulate_color = Color(5.96821e-06, 0.757435, 0.725335, 1)
+
+[sub_resource type="Gradient" id="Gradient_53utf"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l23qr"]
+gradient = SubResource("Gradient_53utf")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c6u2k"]
+texture = SubResource("GradientTexture1D_l23qr")
+modulate_color = Color(1, 0.305882, 0.282353, 1)
 
 [node name="burningTree" type="Area2D" node_paths=PackedStringArray("sprite", "burnTimer")]
 scale = Vector2(2, 2)
@@ -25,9 +45,33 @@ scale = Vector2(1.0336, 1.01342)
 shape = SubResource("CircleShape2D_d2g23")
 
 [node name="burnTriggerTimer" type="Timer" parent="."]
-wait_time = 2.196
+wait_time = 3.0
 one_shot = true
 
+[node name="progress_background" type="ProgressBar" parent="."]
+visible = false
+offset_left = -13.5
+offset_top = -14.5
+offset_right = 26.5
+offset_bottom = -6.5
+theme_override_styles/background = SubResource("StyleBoxTexture_1rhkc")
+show_percentage = false
+
+[node name="burn_progress" type="ProgressBar" parent="progress_background"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 8.0
+theme_override_styles/fill = SubResource("StyleBoxTexture_c6u2k")
+max_value = 3.0
+show_percentage = false
+script = ExtResource("3_uj6mr")
+
+[node name="burnProgressTimer" type="Timer" parent="progress_background"]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="progress_background/burn_progress" method="_on_burning_tree_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_exited" from="." to="progress_background/burn_progress" method="_on_burning_tree_body_exited"]
 [connection signal="timeout" from="burnTriggerTimer" to="." method="_on_burn_trigger_timer_timeout"]
+[connection signal="timeout" from="progress_background/burnProgressTimer" to="." method="_on_burn_progress_timer_timeout"]
+[connection signal="timeout" from="progress_background/burnProgressTimer" to="progress_background/burn_progress" method="_on_burn_progress_timer_timeout"]

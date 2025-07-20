@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bas1pmo6d447t"]
+
+[ext_resource type="Texture2D" uid="uid://dg40t0nx16b5p" path="res://enemies/burning-tree/sprite/bush.png" id="1_8cy4n"]
+
+[node name="bush" type="Sprite2D"]
+texture_filter = 1
+scale = Vector2(28, 28)
+texture = ExtResource("1_8cy4n")

@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://b18m0k0fuyd8n"]
+
+[ext_resource type="PackedScene" uid="uid://ml2y6bdm6ox4" path="res://player/scene/player.tscn" id="1_vonw3"]
+[ext_resource type="PackedScene" uid="uid://b6jt5vlyqulal" path="res://level/background_lvl.tscn" id="2_oi3di"]
+[ext_resource type="Script" uid="uid://blmwit767xlhw" path="res://update_score.gd" id="3_oi3di"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vonw3"]
+bg_color = Color(0.910621, 0.435288, 0.398662, 0.662745)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.667792, 0.968139, 1)
+border_blend = true
+
+[node name="level" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_vonw3")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="TileMapLayer" parent="." instance=ExtResource("2_oi3di")]
+z_index = -2
+position = Vector2(-960, -544)
+
+[node name="UI" type="Control" parent="."]
+z_index = 4
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -928.0
+offset_top = -512.0
+offset_right = -792.0
+offset_bottom = -472.0
+grow_horizontal = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 232.0
+offset_bottom = 96.0
+theme_override_font_sizes/bold_italics_font_size = 2
+theme_override_font_sizes/normal_font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_vonw3")
+text = "Score: 100"
+fit_content = true
+vertical_alignment = 1
+script = ExtResource("3_oi3di")

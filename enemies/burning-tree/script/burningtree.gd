@@ -2,27 +2,31 @@ extends Area2D
 
 @export var sprite: Sprite2D
 @export var burnTimer: Timer
+
 var timeLeft: float
 var resizeTimer: Timer = Timer.new()
 var fadeTimer: Timer = Timer.new()
+var scorePoints: float = 100
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
-
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
+
 func _on_body_entered(body: Node2D) -> void:
+	
 	if burnTimer.wait_time > 0:
 		if burnTimer.is_paused():
 			burnTimer.set_paused(false) 
+			
 		else:
 			burnTimer.start()
-			print(burnTimer.get_time_left())
-			
+		
 func _on_body_exited(body: Node2D) -> void:
 	if burnTimer.wait_time > 0:
 		set_wait_time_to_time_left()
@@ -39,6 +43,7 @@ func set_wait_time_to_time_left() -> void:
 
 
 func _on_burn_trigger_timer_timeout() -> void:
+	Globals.score += scorePoints
 	start_resizeTimer()
 	start_fadeTimer()
 
